@@ -1,6 +1,13 @@
-
+// create state for register
+import { useState } from "react"
 
 export default function Register() {
+const [data, setData] = useState({
+  name: '',
+  email: '',
+  password: '',
+})
+
   // create an arrow function for the onSubmit register & button
   // e = event
   const registerUser = (e) => {
@@ -10,11 +17,11 @@ export default function Register() {
     <div>
       <form onSubmit={registerUser}>
         <label>Name</label>
-        <input type='Text' placeholder='enter name...' />
+        <input type='Text' placeholder='enter name...' value={data.name} onChange={(e) => setData({...data, name: e.target.value})} />
         <label>Email</label>
-        <input type='email' placeholder='enter email...' />
+        <input type='email' placeholder='enter email...' value={data.email} onChange={(e) => setData({...data, email: e.target.value})} />
         <label>Password</label>
-        <input type='password' placeholder='enter password...' />
+        <input type='password' placeholder='enter password...' value={data.password} onChange={(e) => setData({...data, password: e.target.value})} />
         <button type='submit'>Submit</button>
       </form>
     </div>
