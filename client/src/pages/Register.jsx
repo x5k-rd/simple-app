@@ -19,6 +19,7 @@ const [data, setData] = useState({
     e.preventDefault()
     // destructure the data
     const {name, email, password} = data
+    // axios is used to make a POST call to create the user in DB
     try {
       const {data} = await axios.post('/register', {
         name, email, password

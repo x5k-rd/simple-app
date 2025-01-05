@@ -23,6 +23,11 @@ const registerUser = async (req, res) => {
                 error: 'Password is required and it must have 6 or more characters'
             })
         };
+        if(!email) {
+            res.json({
+                error: 'email is mandatory'
+            })
+        }
         // check if email is valid & unique
         const exist = await User.findOne({email})
         if(exist) {
