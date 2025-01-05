@@ -19,8 +19,9 @@ const [data, setData] = useState({
     e.preventDefault()
     // destructure the data
     const {name, email, password} = data
-    // axios is used to make a POST call to create the user in DB
+    // axios is used to make a POST call to backend/DB to create the user in DB
     try {
+      // axios sent POST to create user
       const {data} = await axios.post('/register', {
         name, email, password
       })
@@ -28,7 +29,7 @@ const [data, setData] = useState({
       if(data.error) {
         toast.error(data.error)
       } else {
-        // reset input fields and send success message
+        // reset input fields and send success message and route to login page
         setData({})
           toast.success('Login successful. Welcome!')
           navigate('/login')

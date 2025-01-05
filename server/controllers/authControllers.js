@@ -1,6 +1,9 @@
 // import schema
 const User = require("../models/user")
 
+// import bcrypt functions
+const { hashPassword, comparePasswords } = require('../helpers/auth')
+
 // created a fucntion for test which sends a  jsonresponse and exported it to use in authroutes
 const test = (req, res) =>{
     res.json('this test is working')
@@ -35,9 +38,13 @@ const registerUser = async (req, res) => {
                 error:'Email is already used'
             })
         }
+        
+        const hashedPassword = await hashPassword(password)
         // create user in DB
         const user = await User.create({
-            name, email, password
+            name,
+            email,
+            password: hashedPassword,
         })
 
         return res.json(user)
