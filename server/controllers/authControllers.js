@@ -10,6 +10,7 @@ const test = (req, res) =>{
 }
 
 // DB operation, always uses async / await for 
+// Register endpoint
 const registerUser = async (req, res) => {
     try {
         // this info comes from req.body and is parsed by express middleware
@@ -53,7 +54,35 @@ const registerUser = async (req, res) => {
     }
 }
 
+// Login enpoint
+const loginUser = async (req, res) => {
+try {
+    // grab email and pw 
+    const {email, password} = req.body;
+    // check if user exists
+    const user = await User.findOne({email});
+    if(!user) {
+        return res.json({
+            error: 'No user found'
+        })
+    }
+    // Check if password match, user.password is used from registration endpoint
+    const match = await comparePasswords(password, user.password)
+    if(match) {
+        res.json('password is matching')
+    }
+    if(!match) {
+        res.json ({
+            error: "Password is incorrect"
+        })
+    }
+} catch (error) {
+    console.log(error)
+ }
+}
+
 module.exports = {
     test,
-    registerUser
+    registerUser,
+    loginUser
 }

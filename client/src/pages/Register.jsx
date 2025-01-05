@@ -23,7 +23,9 @@ const [data, setData] = useState({
     try {
       // axios sent POST to create user
       const {data} = await axios.post('/register', {
-        name, email, password
+        name, 
+        email, 
+        password
       })
       // check if there is any error with data as defined in server/controller (data.error/check email)
       if(data.error) {

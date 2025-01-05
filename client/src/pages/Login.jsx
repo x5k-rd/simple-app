@@ -1,15 +1,35 @@
 import { useState } from "react";
 import axios from 'axios'
+// grab toast for data checks to display errors on UI side
+import {toast} from 'react-hot-toast'
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [data, setData] = useState({
     email: '',
     password: '',
   })
 
-  const loginUser = (e) => {
+  const loginUser = async (e) => {
     e.preventDefault()
-    axios.get('/')
+  // destructure data
+  const {email, password} = data
+  try {
+    // grab the destructed data and pass the payload
+    const {data} = await axios.post('/login', {
+      email,
+      password
+    });
+    if(data.error) {
+      toast.error(data.error)
+    } else {
+      setData({});
+      navigate('/')
+    }
+  } catch (error) {
+    
+  }
   }
 
   return (
