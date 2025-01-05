@@ -12,6 +12,9 @@ const cors = require('cors')
 // call mongoose
 const mongoose = require('mongoose')
 
+// call cookie parser
+const cookieParser = require('cookie-parser')
+
 // Initialize express
 const app = express();
 
@@ -26,6 +29,8 @@ mongoose.connect(MONGODB_URL)
 // middleware to parse data (from req.body for e.g)
 // Inject middleware to understand the json format, additional layer.
 app.use(express.json())
+app.use(cookieParser())
+app.use(express.urlencoded({extended: false}))
 
 app.use('/', require('./routes/authroutes'))
 

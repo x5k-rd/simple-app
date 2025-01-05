@@ -4,6 +4,12 @@ const User = require("../models/user")
 // import bcrypt functions
 const { hashPassword, comparePasswords } = require('../helpers/auth')
 
+// call jsonwebtoken
+const jwt = require('jsonwebtoken');
+
+// call secret value set for JWT_Token which is stored in secrets and called via process.env
+const { JWT_SECRET } = process.env
+
 // created a fucntion for test which sends a  jsonresponse and exported it to use in authroutes
 const test = (req, res) =>{
     res.json('this test is working')
@@ -69,7 +75,10 @@ try {
     // Check if password match, user.password is used from registration endpoint
     const match = await comparePasswords(password, user.password)
     if(match) {
-        res.json('password is matching')
+        jwt.sign({email: user.email, id: user._id, name: user.name}, JWT_SECRET, {}, (err, token) => {
+            if(err) throw err;
+            res.cookie('token', token).json(user)
+            })
     }
     if(!match) {
         res.json ({
