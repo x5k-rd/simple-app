@@ -7,5 +7,5 @@ export default defineConfig({
   // added static port for axios origin
   server: {
     port: 5173,
-  },
+  }
 })
