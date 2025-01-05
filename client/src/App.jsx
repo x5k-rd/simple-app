@@ -5,6 +5,11 @@ import Navbar from '../src/components/Navbar';
 import Home from '../src/pages/Home';
 import Register from '../src/pages/Register';
 import Login from '../src/pages/Login';
+import axios from 'axios';
+
+
+axios.defaults.baseURL = 'https://shiny-cod-r4q6q4jvv9x25v94-8000.app.github.dev/';
+axios.defaults.withCredentials = true
 
 function App() {
   return (

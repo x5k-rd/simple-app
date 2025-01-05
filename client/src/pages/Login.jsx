@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState } from "react";
+import axios from 'axios'
 
 export default function Login() {
   const [data, setData] = useState({
@@ -6,14 +7,15 @@ export default function Login() {
     password: '',
   })
 
-  const login = (e) => {
+  const loginUser = (e) => {
     e.preventDefault()
+    axios.get('/')
   }
 
   return (
     <div>
       {/* onsumbit is added to the form to be usable after is defined as button and also requires a function to work */}
-      <form onSubmit={login} >
+      <form onSubmit={loginUser} >
       <label>Email</label>
         <input type='email' placeholder='enter email...' value={data.email} onChange={(e) => setData({...data, email: e.target.value})}/>
         <label>Password</label>
