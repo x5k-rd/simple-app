@@ -1,7 +1,12 @@
 // create state for register
-import { useState } from "react"
+import { useState } from 'react'
+import axios from 'axios'
+import {toast} from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
+
 
 export default function Register() {
+const navigate = useNavigate()
 const [data, setData] = useState({
   name: '',
   email: '',
@@ -10,8 +15,26 @@ const [data, setData] = useState({
 
   // create an arrow function for the onSubmit register & button
   // e = event
-  const registerUser = (e) => {
+  const registerUser = async (e) => {
     e.preventDefault()
+    // destructure the data
+    const {name, email, password} = data
+    try {
+      const {data} = await axios.post('/register', {
+        name, email, password
+      })
+      // check if there is any error with data as defined in server/controller (data.error/check email)
+      if(data.error) {
+        toast.error(data.error)
+      } else {
+        // reset input fields and send success message
+        setData({})
+          toast.success('Login successful. Welcome!')
+          navigate('/login')
+      }
+    } catch (error) {
+      console.log(Error)
+    }
   }
   return (
     <div>

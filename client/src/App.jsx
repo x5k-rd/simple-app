@@ -6,6 +6,7 @@ import Home from '../src/pages/Home';
 import Register from '../src/pages/Register';
 import Login from '../src/pages/Login';
 import axios from 'axios';
+import { Toaster } from 'react-hot-toast'
 
 
 axios.defaults.baseURL = 'https://shiny-cod-r4q6q4jvv9x25v94-8000.app.github.dev/';
@@ -16,6 +17,8 @@ function App() {
     <>
     {/* navbar or static items are not put inside routes */}
      <Navbar />
+     {/* 2 sec notifications */}
+     <Toaster position='bottom-right' toastOptions={{duration: 2000}} />
      <Routes>
       {/* '/' is the home page path & element for the each route */}
       <Route path='/' element={<Home />} />
