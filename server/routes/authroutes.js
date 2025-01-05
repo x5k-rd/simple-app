@@ -5,7 +5,7 @@ const router = express.Router();
 // ensure that different hosts can connect with different api endpoints 
 const cors = require('cors')
 // import from authcontrollers
-const { test } = require('../controllers/authControllers')
+const { test, registerUser } = require('../controllers/authControllers')
 
 // middle ware for router
 router.use(
@@ -17,6 +17,9 @@ router.use(
 
 // used Test as function inside GET router
 router.get('/', test)
+
+router.post('/register', registerUser)
+
 
 // always export files in express
 module.exports = router

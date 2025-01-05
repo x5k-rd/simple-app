@@ -12,6 +12,9 @@ const cors = require('cors')
 // call mongoose
 const mongoose = require('mongoose')
 
+// Initialize express
+const app = express();
+
 // grab DB Key from process.env & MONGODB_URL is the secret name within CodeSpace
 const { MONGODB_URL } = process.env 
 
@@ -20,8 +23,9 @@ mongoose.connect(MONGODB_URL)
 .then(() => console.log('DB connected'))
 .catch((err) => console.log('DB not connected', err))
 
-// Initialize express
-const app = express();
+// middleware to parse data (from req.body for e.g)
+// Inject middleware to understand the json format, additional layer.
+app.use(express.json())
 
 app.use('/', require('./routes/authroutes'))
 
