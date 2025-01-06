@@ -15,6 +15,7 @@ axios.defaults.withCredentials = true
 
 function App() {
   return (
+    // wrap the entire app with ContextProvide that allows to use the state defined in context, useEffect always starts when new page renders for a logged in user
     <UserContextProvider>
     {/* navbar or static items are not put inside routes */}
      <Navbar />
