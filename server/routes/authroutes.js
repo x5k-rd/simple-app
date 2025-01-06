@@ -11,7 +11,7 @@ const { test, registerUser, loginUser, getProfile } = require('../controllers/au
 router.use(
     cors({
         credentials: true,
-        origin: 'https://shiny-cod-r4q6q4jvv9x25v94-5174.app.github.dev'
+        origin: 'https://shiny-cod-r4q6q4jvv9x25v94-5173.app.github.dev'
     })
 )
 
